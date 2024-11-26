@@ -1,0 +1,126 @@
+# * Copyright 2024 Lukas Spies <Lukas@photoqt.org>
+# * SPDX-License-Identifier: GPL-2.0-or-later
+name: photoqt
+confinement: strict
+grade: stable
+base: core22
+
+adopt-info: photoqt
+
+description: Fast and highly configurable image viewer with a simple and nice interface, supporting well over 100 file formats, including images, videos, and documents.
+summary: View and manage images, videos, and documents.
+
+contact: Lukas@photoqt.org
+issues: https://gitlab.com/lspies/photoqt/-/issues
+source-code: https://gitlab.com/lspies/photoqt
+website: https://photoqt.org
+donation: https://photoqt.org/donate
+
+
+apps:
+  photoqt:
+    extensions:
+      - kde-neon-6
+    common-id: org.photoqt.PhotoQt
+    desktop: usr/local/share/applications/org.photoqt.PhotoQt.desktop
+    command: usr/local/bin/photoqt
+    slots:
+      - session-slot
+    plugs:
+      - home
+      - removable-media
+      - desktop
+      - desktop-legacy
+      - opengl
+      - wayland
+      - x11
+      - unity7
+      - audio-playback
+      - network
+      - network-bind
+      - cups
+      - session-plug
+
+compression: lzo
+
+plugs:
+  session-plug:
+    interface: dbus
+    bus: session
+    name: org.photoqt.PhotoQt
+    
+slots:
+  session-slot:
+    interface: dbus
+    bus: session
+    name: org.photoqt.PhotoQt
+
+parts:
+  photoqt:
+    plugin: cmake
+    source: https://photoqt.org/downloads/source/photoqt-4.6.tar.gz
+    parse-info:
+      - usr/local/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
+    override-build: |
+      ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
+      ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
+      snapcraftctl build
+    cmake-parameters:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DRAW=ON
+      - -DIMAGEMAGICK=OFF
+      - -DGRAPHICSMAGICK=ON
+      - -DDEVIL=ON
+      - -DFREEIMAGE=ON
+      - -DPOPPLER=OFF
+      - -DQTPDF=ON
+      - -DLIBARCHIVE=ON
+      - -DVIDEO_QT=ON
+      - -DVIDEO_MPV=ON
+      - -DZXING=ON
+      - -DEXIV2=ON
+      - -DPUGIXML=ON
+      - -DCHROMECAST=OFF
+      - -DLOCATION=ON
+      - -DMOTIONPHOTO=ON
+      - -DPHOTOSPHERE=ON
+      - -DLCMS2=ON
+      - -DSNAPBUILD=ON
+    build-packages:
+      - libexiv2-dev
+      - libexpat1-dev
+      - libheif-dev
+      - libjpeg-dev
+      - liblcms2-dev
+      - libpng-dev
+      - libtiff-dev
+      - libxml2-dev
+      - libraw-dev
+      - libdevil-dev
+      - libfreeimageplus-dev
+      - libpugixml-dev
+      - libarchive-dev
+      - libzxingcore-dev
+      - libmpv-dev
+      - libgraphicsmagick++1-dev
+      - libgraphicsmagick1-dev
+    stage-packages:
+      - libheif1
+      - libjpeg8
+      - libjpeg-turbo8
+      - libx265-199
+      - libgif7
+      - kimageformat-plugins
+      - libraw20
+      - ghostscript
+      - libdevil1c2
+      - libfreeimage3
+      - libpugixml1v5
+      - libarchive13
+      - libzxingcore1
+      - libmpv1
+      - libjxr0
+      - libdjvulibre21
+      - libgraphicsmagick-q16-3
+      - libgraphicsmagick++-q16-12
+      - graphicsmagick
