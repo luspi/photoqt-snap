@@ -104,6 +104,7 @@ parts:
       - libmpv-dev
       - libgraphicsmagick++1-dev
       - libgraphicsmagick1-dev
+      - libcups2-dev
     stage-packages:
       - libheif1
       - libjpeg8
@@ -124,3 +125,4 @@ parts:
       - libgraphicsmagick-q16-3
       - libgraphicsmagick++-q16-12
       - graphicsmagick
+      - libcups2
