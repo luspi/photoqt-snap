@@ -4,6 +4,8 @@ name: photoqt
 confinement: strict
 grade: stable
 base: core22
+architectures:
+  - build-on: [amd64,arm64]
 
 adopt-info: photoqt
 
