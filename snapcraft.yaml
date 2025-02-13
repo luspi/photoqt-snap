@@ -69,6 +69,7 @@ parts:
     override-build: |
       ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
       ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
+      sed -i 's/VERSION 3.26/VERSION 3.22/g' CMakeLists.txt
       snapcraftctl build
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
