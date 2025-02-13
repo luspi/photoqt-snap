@@ -69,7 +69,7 @@ parts:
     override-build: |
       ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
       ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
-      sed -i 's/VERSION 3.26/VERSION 3.22/g' /build/photoqt/CMakeLists.txt
+      sed -i 's/VERSION 3.26/VERSION 3.22/g' $SNAPCRAFT_PART_INSTALL/CMakeLists.txt
       snapcraftctl build
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
