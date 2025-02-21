@@ -3,11 +3,11 @@
 name: photoqt
 confinement: strict
 grade: stable
-base: core22
-architectures:
-  - build-on: [amd64]
-    build-for: [amd64]
-  - build-on: [arm64]
+base: core24
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 adopt-info: photoqt
@@ -45,6 +45,8 @@ apps:
       - network-bind
       - cups
       - session-plug
+    environment:
+      LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy"
 
 compression: lzo
 
@@ -73,25 +75,27 @@ parts:
       snapcraftctl build
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
-      - -DRAW=ON
-      - -DIMAGEMAGICK=OFF
-      - -DGRAPHICSMAGICK=ON
-      - -DDEVIL=ON
-      - -DFREEIMAGE=ON
-      - -DPOPPLER=OFF
-      - -DQTPDF=ON
-      - -DLIBARCHIVE=ON
-      - -DVIDEO_QT=ON
-      - -DVIDEO_MPV=ON
-      - -DZXING=ON
-      - -DEXIV2=ON
-      - -DPUGIXML=ON
-      - -DCHROMECAST=OFF
-      - -DLOCATION=ON
-      - -DMOTIONPHOTO=ON
-      - -DPHOTOSPHERE=ON
-      - -DLCMS2=ON
-      - -DSNAPBUILD=ON
+      - -DWITH_IMAGEMAGICK=OFF
+      - -DWITH_GRAPHICSMAGICK=ON
+      - -DWITH_LIBRAW=ON
+      - -DWITH_DEVIL=ON
+      - -DWITH_FREEIMAGE=ON
+      - -DWITH_POPPLER=OFF
+      - -DWITH_QTPDF=ON
+      - -DWITH_LIBARCHIVE=ON
+      - -DWITH_VIDEO_QT=ON
+      - -DWITH_VIDEO_MPV=ON
+      - -DWITH_LIBVIPS=OFF
+      - -DWITH_RESVG=OFF
+      - -DWITH_EXIV2=ON
+      - -DWITH_EXIV2_ENABLE_BMFF=ON
+      - -DWITH_PUGIXML=ON
+      - -DWITH_ZXING=ON
+      - -DWITH_CHROMECAST=OFF
+      - -DWITH_LOCATION=ON
+      - -DWITH_LCMS2=ON
+      - -DWITH_MOTIONPHOTO=ON
+      - -DWITH_PHOTOSPHERE=ON
     build-packages:
       - libexiv2-dev
       - libexpat1-dev
@@ -106,11 +110,12 @@ parts:
       - libfreeimageplus-dev
       - libpugixml-dev
       - libarchive-dev
-      - libzxingcore-dev
+      - libzxing-dev
       - libmpv-dev
       - libgraphicsmagick++1-dev
       - libgraphicsmagick1-dev
       - libcups2-dev
+      - libproxy1v5
     stage-packages:
       - libheif1
       - libjpeg8
@@ -118,17 +123,17 @@ parts:
       - libx265-199
       - libgif7
       - kimageformat-plugins
-      - libraw20
+      - libraw23t64
       - ghostscript
       - libdevil1c2
       - libfreeimage3
       - libpugixml1v5
-      - libarchive13
-      - libzxingcore1
-      - libmpv1
-      - libjxr0
+      - libarchive13t64
+      - libzxing3
+      - libmpv2
+      - libjxr0t64
       - libdjvulibre21
-      - libgraphicsmagick-q16-3
-      - libgraphicsmagick++-q16-12
+      - libgraphicsmagick-q16-3t64
+      - libgraphicsmagick++-q16-12t64
       - graphicsmagick
-      - libcups2
+      - libcups2t64
