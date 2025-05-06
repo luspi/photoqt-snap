@@ -54,7 +54,7 @@ plugs:
     interface: dbus
     bus: session
     name: org.photoqt.PhotoQt
-    
+
 slots:
   session-slot:
     interface: dbus
@@ -64,7 +64,7 @@ slots:
 parts:
   photoqt:
     plugin: cmake
-    source: https://photoqt.org/downloads/source/photoqt-4.9.tar.gz
+    source: https://photoqt.org/downloads/source/photoqt-4.9.1.tar.gz
     parse-info:
       - usr/local/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
     override-build: |
