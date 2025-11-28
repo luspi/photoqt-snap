@@ -64,7 +64,7 @@ slots:
 parts:
   photoqt:
     plugin: cmake
-    source: https://photoqt.org/downloads/source/photoqt-4.9.2.tar.gz
+    source: https://photoqt.org/downloads/source/photoqt-5.0-beta1.tar.gz
     parse-info:
       - usr/local/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
     override-build: |
@@ -95,6 +95,7 @@ parts:
       - -DWITH_LCMS2=ON
       - -DWITH_MOTIONPHOTO=ON
       - -DWITH_PHOTOSPHERE=ON
+      - -DWITH_INCLUDED_EXTENSIONS=ON
     build-packages:
       - libexiv2-dev
       - libexpat1-dev
