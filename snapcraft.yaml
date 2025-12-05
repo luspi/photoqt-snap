@@ -116,6 +116,7 @@ parts:
       - libgraphicsmagick1-dev
       - libcups2-dev
       - libproxy1v5
+      - libyaml-cpp-dev
     stage-packages:
       - libheif1
       - libjpeg8
@@ -137,3 +138,4 @@ parts:
       - libgraphicsmagick++-q16-12t64
       - graphicsmagick
       - libcups2t64
+      - libyaml-cpp0.8
