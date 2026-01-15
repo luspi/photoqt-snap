@@ -1,4 +1,4 @@
-# * Copyright 2024 Lukas Spies <Lukas@photoqt.org>
+# * Copyright 2026 Lukas Spies <Lukas@photoqt.org>
 # * SPDX-License-Identifier: GPL-2.0-or-later
 name: photoqt
 confinement: strict
@@ -62,20 +62,80 @@ slots:
     name: org.photoqt.PhotoQt
 
 parts:
+  # photoqt-extensions:
+  #   plugin: cmake
+  #   source: https://photoqt.org/downloads/extensions/photoqt-extensions-5.1.tar.gz
+  #   parse-info:
+  #     - usr/local/share/metainfo/org.photoqt.Extensions.metainfo.xml
+  #   override-build: |
+  #     ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
+  #     ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
+  #     snapcraftctl build
+  #   cmake-parameters:
+  #     - -DCMAKE_BUILD_TYPE=Release
+  #     - -DCMAKE_INSTALL_PREFIX=/usr/lib/PhotoQt/extensions
+  #     - -DWITH_IMAGEMAGICK=OFF
+  #     - -DWITH_GRAPHICSMAGICK=ON
+  #   build-packages:
+  #     - libexiv2-dev
+  #     - libexpat1-dev
+  #     - libheif-dev
+  #     - libjpeg-dev
+  #     - liblcms2-dev
+  #     - libpng-dev
+  #     - libtiff-dev
+  #     - libraw-dev
+  #     - libdevil-dev
+  #     - libfreeimageplus-dev
+  #     - libgraphicsmagick++1-dev
+  #     - libgraphicsmagick1-dev
+  imagemagick:
+    plugin: autotools
+    source: https://github.com/ImageMagick/ImageMagick
+    source-type: git
+    source-tag: 7.1.2-11
+    autotools-configure-parameters:
+      - --enable-shared
+      - --disable-static
+      - --disable-docs
+      - --with-modules
+      - --with-threads
+      - --with-png
+      - --enable-hdri
+      - --enable-opencl
+      - --with-djvu
+      - --with-fftw
+      - --with-jxl
+      - --with-lqr
+      - --with-modules
+      - --with-openexr
+      - --with-openjp2
+      - --with-rsvg
+      - --with-webp
+      - --with-wmf
+      - --with-xml
+      - --with-dps
+      - --with-fpx
+      - --with-gvc
+    build-packages:
+      - libheif-dev
+      - libjpeg-dev
+      - liblcms2-dev
+      - libpng-dev
+      - libtiff-dev
+      - libxml2-dev
+      - libraw-dev
+      - libltdl-dev
+
   photoqt:
     plugin: cmake
-    source: https://photoqt.org/downloads/source/photoqt-5.0.tar.gz
+    source: https://photoqt.org/downloads/source/photoqt-5.1.tar.gz
     parse-info:
       - usr/local/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
-    override-build: |
-      ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
-      ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
-      sed -i 's/VERSION 3.26/VERSION 3.22/g' $SNAPCRAFT_PART_SRC/CMakeLists.txt
-      snapcraftctl build
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
-      - -DWITH_IMAGEMAGICK=OFF
-      - -DWITH_GRAPHICSMAGICK=ON
+      - -DWITH_IMAGEMAGICK=ON
+      - -DWITH_GRAPHICSMAGICK=OFF
       - -DWITH_LIBRAW=ON
       - -DWITH_DEVIL=ON
       - -DWITH_FREEIMAGE=ON
@@ -88,14 +148,14 @@ parts:
       - -DWITH_RESVG=OFF
       - -DWITH_EXIV2=ON
       - -DWITH_EXIV2_ENABLE_BMFF=ON
-      - -DWITH_PUGIXML=ON
+      - -DWITH_PUGIXML=OFF
       - -DWITH_ZXING=ON
       - -DWITH_CHROMECAST=OFF
       - -DWITH_LOCATION=ON
       - -DWITH_LCMS2=ON
       - -DWITH_MOTIONPHOTO=ON
       - -DWITH_PHOTOSPHERE=ON
-      - -DWITH_INCLUDED_EXTENSIONS=ON
+      - -DWITH_EXTENSIONS_SUPPORT=ON
     build-packages:
       - libexiv2-dev
       - libexpat1-dev
@@ -108,34 +168,29 @@ parts:
       - libraw-dev
       - libdevil-dev
       - libfreeimageplus-dev
-      - libpugixml-dev
       - libarchive-dev
       - libzxing-dev
       - libmpv-dev
-      - libgraphicsmagick++1-dev
-      - libgraphicsmagick1-dev
       - libcups2-dev
       - libproxy1v5
       - libyaml-cpp-dev
+      - libqca-qt6-dev
+      - qt6-declarative-dev
     stage-packages:
       - libheif1
       - libjpeg8
       - libjpeg-turbo8
       - libx265-199
-      - libgif7
       - kimageformat-plugins
-      - libraw23t64
       - ghostscript
       - libdevil1c2
       - libfreeimage3
-      - libpugixml1v5
       - libarchive13t64
       - libzxing3
       - libmpv2
       - libjxr0t64
-      - libdjvulibre21
-      - libgraphicsmagick-q16-3t64
-      - libgraphicsmagick++-q16-12t64
-      - graphicsmagick
       - libcups2t64
       - libyaml-cpp0.8
+      - libqca-qt6-2
+      - libqca-qt6-plugins
+      - libglut3.12
