@@ -62,33 +62,6 @@ slots:
     name: org.photoqt.PhotoQt
 
 parts:
-  # photoqt-extensions:
-  #   plugin: cmake
-  #   source: https://photoqt.org/downloads/extensions/photoqt-extensions-5.1.tar.gz
-  #   parse-info:
-  #     - usr/local/share/metainfo/org.photoqt.Extensions.metainfo.xml
-  #   override-build: |
-  #     ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
-  #     ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
-  #     snapcraftctl build
-  #   cmake-parameters:
-  #     - -DCMAKE_BUILD_TYPE=Release
-  #     - -DCMAKE_INSTALL_PREFIX=/usr/lib/PhotoQt/extensions
-  #     - -DWITH_IMAGEMAGICK=OFF
-  #     - -DWITH_GRAPHICSMAGICK=ON
-  #   build-packages:
-  #     - libexiv2-dev
-  #     - libexpat1-dev
-  #     - libheif-dev
-  #     - libjpeg-dev
-  #     - liblcms2-dev
-  #     - libpng-dev
-  #     - libtiff-dev
-  #     - libraw-dev
-  #     - libdevil-dev
-  #     - libfreeimageplus-dev
-  #     - libgraphicsmagick++1-dev
-  #     - libgraphicsmagick1-dev
   imagemagick:
     plugin: autotools
     source: https://github.com/ImageMagick/ImageMagick
@@ -126,6 +99,28 @@ parts:
       - libxml2-dev
       - libraw-dev
       - libltdl-dev
+
+  photoqt-extensions:
+    plugin: cmake
+    source: https://photoqt.org/downloads/extensions/photoqt-extensions-5.1.tar.gz
+    parse-info:
+      - usr/local/share/metainfo/org.photoqt.Extensions.metainfo.xml
+    cmake-parameters:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/usr/lib/PhotoQt/extensions
+      - -DWITH_IMAGEMAGICK=ON
+      - -DWITH_GRAPHICSMAGICK=OFF
+    build-packages:
+      - libexiv2-dev
+      - libexpat1-dev
+      - libheif-dev
+      - libjpeg-dev
+      - liblcms2-dev
+      - libpng-dev
+      - libtiff-dev
+      - libraw-dev
+      - libdevil-dev
+      - libfreeimageplus-dev
 
   photoqt:
     plugin: cmake
