@@ -68,6 +68,7 @@ parts:
     source-type: git
     source-tag: 7.1.2-11
     autotools-configure-parameters:
+      - --prefix=/usr
       - --enable-shared
       - --disable-static
       - --disable-docs
