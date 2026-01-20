@@ -110,6 +110,10 @@ parts:
       - imagemagick
     parse-info:
       - usr/local/share/metainfo/org.photoqt.Extensions.metainfo.xml
+    override-build: |
+      sed -i 's/ImageMagick::Magick++/\"imagemagick\"/g' $SNAPCRAFT_PART_SRC/CMakeLists.txt
+      sed -i 's/ImageMagick::Magick++/\"imagemagick\"/g' $SNAPCRAFT_PART_SRC/*/CMakeLists.txt
+      snapcraftctl build
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr/lib/PhotoQt/extensions
@@ -134,6 +138,9 @@ parts:
       - imagemagick
     parse-info:
       - usr/local/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
+    override-build: |
+      sed -i 's/ImageMagick::Magick++/\"imagemagick\"/g' $SNAPCRAFT_PART_SRC/CMakeLists.txt
+      snapcraftctl build
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DWITH_IMAGEMAGICK=ON
