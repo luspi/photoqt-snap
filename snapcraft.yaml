@@ -104,9 +104,10 @@ parts:
       - usr/lib/*
 
   photoqt-extensions:
-    after: imagemagick
     plugin: cmake
     source: https://photoqt.org/downloads/extensions/photoqt-extensions-5.1.tar.gz
+    after:
+      - imagemagick
     parse-info:
       - usr/local/share/metainfo/org.photoqt.Extensions.metainfo.xml
     cmake-parameters:
@@ -127,9 +128,10 @@ parts:
       - libfreeimageplus-dev
 
   photoqt:
-    after: imagemagick
     plugin: cmake
     source: https://photoqt.org/downloads/source/photoqt-5.1.tar.gz
+    after:
+      - imagemagick
     parse-info:
       - usr/local/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
     cmake-parameters:
