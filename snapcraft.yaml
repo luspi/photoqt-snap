@@ -102,6 +102,7 @@ parts:
       - libltdl-dev
     stage:
       - usr/lib/*
+      - usr/include/*
 
   photoqt-extensions:
     plugin: cmake
