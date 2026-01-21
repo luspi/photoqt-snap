@@ -114,7 +114,9 @@ parts:
     override-build: |
       sed -i 's/ImageMagick::Magick++/\"imagemagick\"/g' $SNAPCRAFT_PART_SRC/CMakeLists.txt
       sed -i 's/ImageMagick::Magick++/\"imagemagick\"/g' $SNAPCRAFT_PART_SRC/*/CMakeLists.txt
-      export PKG_CONFIG_PATH=$SNAPCRAFT_STAGE/usr/lib/pkgconfig
+      echo "\n" >> $SNAPCRAFT_PART_SRC/CMakeLists.txt
+      echo "include_directories(\"/usr/include/ImageMagick-7\")" >> $SNAPCRAFT_PART_SRC/CMakeLists.txt
+      echo "\n" >> $SNAPCRAFT_PART_SRC/CMakeLists.txt
       snapcraftctl build
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
@@ -142,7 +144,9 @@ parts:
       - usr/local/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
     override-build: |
       sed -i 's/ImageMagick::Magick++/\"imagemagick\"/g' $SNAPCRAFT_PART_SRC/CMakeLists.txt
-      export PKG_CONFIG_PATH=$SNAPCRAFT_STAGE/usr/lib/pkgconfig
+      echo "\n" >> $SNAPCRAFT_PART_SRC/CMakeLists.txt
+      echo "include_directories(\"/usr/include/ImageMagick-7\")" >> $SNAPCRAFT_PART_SRC/CMakeLists.txt
+      echo "\n" >> $SNAPCRAFT_PART_SRC/CMakeLists.txt
       snapcraftctl build
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
