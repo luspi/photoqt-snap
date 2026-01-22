@@ -93,8 +93,6 @@ parts:
   photoqt:
     plugin: cmake
     source: https://photoqt.org/downloads/source/photoqt-5.1.tar.gz
-    after:
-      - imagemagick
     parse-info:
       - usr/local/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
     override-build: |
