@@ -20,14 +20,13 @@ source-code: https://gitlab.com/lspies/photoqt
 website: https://photoqt.org
 donation: https://photoqt.org/donate
 
-
 apps:
   photoqt:
     extensions:
       - kde-neon-6
     common-id: org.photoqt.PhotoQt
-    desktop: usr/local/share/applications/org.photoqt.PhotoQt.desktop
-    command: usr/local/bin/photoqt
+    desktop: usr/share/applications/org.photoqt.PhotoQt.desktop
+    command: usr/bin/photoqt
     slots:
       - session-slot
     plugs:
@@ -44,8 +43,10 @@ apps:
       - network-bind
       - cups
       - session-plug
+      - ffmpeg-2404
     environment:
-      LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy"
+      LD_LIBRARY_PATH: $SNAP/ffmpeg-platform/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$LD_LIBRARY_PATH
+      PATH: $SNAP/ffmpeg-platform/usr/bin:$PATH
 
 compression: lzo
 
@@ -54,6 +55,10 @@ plugs:
     interface: dbus
     bus: session
     name: org.photoqt.PhotoQt
+  ffmpeg-2404:
+    interface: content
+    target: ffmpeg-platform
+    default-provider: ffmpeg-2404
 
 slots:
   session-slot:
@@ -66,7 +71,7 @@ parts:
     plugin: cmake
     source: https://photoqt.org/downloads/extensions/photoqt-extensions-5.1.tar.gz
     parse-info:
-      - usr/local/share/metainfo/org.photoqt.Extensions.metainfo.xml
+      - usr/share/metainfo/org.photoqt.Extensions.metainfo.xml
     override-build: |
       ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
       ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
@@ -74,6 +79,7 @@ parts:
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr/lib/PhotoQt/extensions
+      - -DQT_QML_NO_CACHEGEN=ON
       - -DWITH_IMAGEMAGICK=OFF
       - -DWITH_GRAPHICSMAGICK=ON
     build-packages:
@@ -94,13 +100,15 @@ parts:
     plugin: cmake
     source: https://photoqt.org/downloads/source/photoqt-5.1.tar.gz
     parse-info:
-      - usr/local/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
+      - usr/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
     override-build: |
       ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
       ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
       snapcraftctl build
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DQT_QML_NO_CACHEGEN=ON
       - -DWITH_IMAGEMAGICK=OFF
       - -DWITH_GRAPHICSMAGICK=ON
       - -DWITH_LIBRAW=ON
@@ -110,7 +118,7 @@ parts:
       - -DWITH_QTPDF=ON
       - -DWITH_LIBARCHIVE=ON
       - -DWITH_VIDEO_QT=ON
-      - -DWITH_VIDEO_MPV=ON
+      - -DWITH_VIDEO_MPV=OFF
       - -DWITH_LIBVIPS=OFF
       - -DWITH_RESVG=OFF
       - -DWITH_EXIV2=ON
@@ -137,7 +145,6 @@ parts:
       - libfreeimageplus-dev
       - libarchive-dev
       - libzxing-dev
-      - libmpv-dev
       - libcups2-dev
       - libproxy1v5
       - libyaml-cpp-dev
@@ -145,6 +152,7 @@ parts:
       - qt6-declarative-dev
       - libgraphicsmagick++1-dev
       - libgraphicsmagick1-dev
+      - libproxy1v5
     stage-packages:
       - libheif1
       - libjpeg8
@@ -156,7 +164,6 @@ parts:
       - libfreeimage3
       - libarchive13t64
       - libzxing3
-      - libmpv2
       - libjxr0t64
       - libcups2t64
       - libyaml-cpp0.8
@@ -166,3 +173,4 @@ parts:
       - libgraphicsmagick-q16-3t64
       - libgraphicsmagick++-q16-12t64
       - graphicsmagick
+      - libpulse0
