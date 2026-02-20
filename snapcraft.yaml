@@ -69,7 +69,7 @@ slots:
 parts:
   photoqt-extensions:
     plugin: cmake
-    source: https://photoqt.org/downloads/extensions/photoqt-extensions-5.1.tar.gz
+    source: https://photoqt.org/downloads/extensions/photoqt-extensions-5.2.tar.gz
     parse-info:
       - usr/share/metainfo/org.photoqt.Extensions.metainfo.xml
     override-build: |
@@ -92,13 +92,12 @@ parts:
       - libtiff-dev
       - libraw-dev
       - libdevil-dev
-      - libfreeimageplus-dev
       - libgraphicsmagick++1-dev
       - libgraphicsmagick1-dev
 
   photoqt:
     plugin: cmake
-    source: https://photoqt.org/downloads/source/photoqt-5.1.tar.gz
+    source: https://photoqt.org/downloads/source/photoqt-5.2.tar.gz
     parse-info:
       - usr/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
     override-build: |
@@ -113,7 +112,6 @@ parts:
       - -DWITH_GRAPHICSMAGICK=ON
       - -DWITH_LIBRAW=ON
       - -DWITH_DEVIL=ON
-      - -DWITH_FREEIMAGE=ON
       - -DWITH_POPPLER=OFF
       - -DWITH_QTPDF=ON
       - -DWITH_LIBARCHIVE=ON
@@ -142,7 +140,6 @@ parts:
       - libxml2-dev
       - libraw-dev
       - libdevil-dev
-      - libfreeimageplus-dev
       - libarchive-dev
       - libzxing-dev
       - libcups2-dev
@@ -161,7 +158,6 @@ parts:
       - kimageformat-plugins
       - ghostscript
       - libdevil1c2
-      - libfreeimage3
       - libarchive13t64
       - libzxing3
       - libjxr0t64
