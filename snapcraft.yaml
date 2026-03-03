@@ -100,6 +100,9 @@ parts:
     source: https://photoqt.org/downloads/source/photoqt-5.2.tar.gz
     parse-info:
       - usr/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
+    override-pull: |
+      craftctl default
+      patch -p1 < ${CRAFT_PROJECT_DIR}/thumbnail-hide-fix.patch
     override-build: |
       ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
       ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
