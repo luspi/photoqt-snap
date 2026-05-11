@@ -69,7 +69,7 @@ slots:
 parts:
   photoqt-extensions:
     plugin: cmake
-    source: https://photoqt.org/downloads/extensions/photoqt-extensions-5.2.tar.gz
+    source: https://photoqt.org/downloads/extensions/photoqt-extensions-5.3.tar.gz
     parse-info:
       - usr/share/metainfo/org.photoqt.Extensions.metainfo.xml
     override-build: |
@@ -97,12 +97,9 @@ parts:
 
   photoqt:
     plugin: cmake
-    source: https://photoqt.org/downloads/source/photoqt-5.2.tar.gz
+    source: https://photoqt.org/downloads/source/photoqt-5.3.tar.gz
     parse-info:
       - usr/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
-    override-pull: |
-      craftctl default
-      patch -p1 < ${CRAFT_PROJECT_DIR}/thumbnail-hide-fix.patch
     override-build: |
       ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
       ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
@@ -132,6 +129,7 @@ parts:
       - -DWITH_MOTIONPHOTO=ON
       - -DWITH_PHOTOSPHERE=ON
       - -DWITH_EXTENSIONS_SUPPORT=ON
+      - -DWITH_FFMPEGTHUMBNAILER=ON
     build-packages:
       - libexiv2-dev
       - libexpat1-dev
@@ -153,6 +151,7 @@ parts:
       - libgraphicsmagick++1-dev
       - libgraphicsmagick1-dev
       - libproxy1v5
+      - libffmpegthumbnailer-dev
     stage-packages:
       - libheif1
       - libjpeg8
@@ -173,3 +172,4 @@ parts:
       - libgraphicsmagick++-q16-12t64
       - graphicsmagick
       - libpulse0
+      - ffmpegthumbnailer
