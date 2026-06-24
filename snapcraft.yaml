@@ -152,6 +152,7 @@ parts:
       - libproxy1v5
       - libffmpegthumbnailer-dev
       - openssl
+      - libssl-dev
     stage-packages:
       - libheif1
       - libjpeg8
