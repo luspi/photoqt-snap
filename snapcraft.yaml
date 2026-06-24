@@ -151,7 +151,6 @@ parts:
       - libgraphicsmagick1-dev
       - libproxy1v5
       - libffmpegthumbnailer-dev
-      - openssl
       - libssl-dev
     stage-packages:
       - libheif1
@@ -172,4 +171,4 @@ parts:
       - graphicsmagick
       - libpulse0
       - ffmpegthumbnailer
-      - openssl
+      - libssl
