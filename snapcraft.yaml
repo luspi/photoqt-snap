@@ -72,6 +72,10 @@ parts:
     source: https://photoqt.org/downloads/extensions/photoqt-extensions-5.4.tar.gz
     parse-info:
       - usr/share/metainfo/org.photoqt.Extensions.metainfo.xml
+    override-build: |
+      ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
+      ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
+      snapcraftctl build
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
@@ -89,6 +93,8 @@ parts:
       ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
       ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
       snapcraftctl build
+    environment:
+      LD_LIBRARY_PATH: "$SNAP/usr/lib:$LD_LIBRARY_PATH"
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
