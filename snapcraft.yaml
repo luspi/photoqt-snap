@@ -155,3 +155,4 @@ parts:
       - libmagickcore-6.q16hdri-7t64
       - libmagickcore-6.q16hdri-7-extra
       - libmagickwand-6.q16hdri-7t64
+      - libavfilter9
