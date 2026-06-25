@@ -135,6 +135,7 @@ parts:
       - libffmpegthumbnailer-dev
       - libssl-dev
       - libavfilter9
+      - libmagick++-dev
     stage-packages:
       - libheif1
       - libjpeg8
