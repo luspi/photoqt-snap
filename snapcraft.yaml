@@ -72,10 +72,6 @@ parts:
     source: https://photoqt.org/downloads/extensions/photoqt-extensions-5.4.tar.gz
     parse-info:
       - usr/share/metainfo/org.photoqt.Extensions.metainfo.xml
-    override-build: |
-      ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
-      ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
-      snapcraftctl build
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
@@ -89,18 +85,12 @@ parts:
     source: https://photoqt.org/downloads/source/photoqt-5.4.tar.gz
     parse-info:
       - usr/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
-    override-build: |
-      ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
-      ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
-      snapcraftctl build
-    environment:
-      LD_LIBRARY_PATH: "$SNAP/usr/lib:$LD_LIBRARY_PATH"
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DQT_QML_NO_CACHEGEN=ON
-      - -DWITH_IMAGEMAGICK=OFF
-      - -DWITH_GRAPHICSMAGICK=ON
+      - -DWITH_IMAGEMAGICK=ON
+      - -DWITH_GRAPHICSMAGICK=OFF
       - -DWITH_LIBRAW=ON
       - -DWITH_DEVIL=ON
       - -DWITH_POPPLER=OFF
@@ -138,8 +128,9 @@ parts:
       - libproxy1v5
       - libyaml-cpp-dev
       - qt6-declarative-dev
-      - libgraphicsmagick++1-dev
-      - libgraphicsmagick1-dev
+      - libmagick++-6.q16hdri-dev
+      - libmagickcore-6.q16hdri-dev
+      - libmagickwand-6.q16hdri-dev
       - libproxy1v5
       - libffmpegthumbnailer-dev
       - libssl-dev
@@ -157,9 +148,10 @@ parts:
       - libcups2t64
       - libyaml-cpp0.8
       - libglut3.12
-      - libgraphicsmagick-q16-3t64
-      - libgraphicsmagick++-q16-12t64
-      - graphicsmagick
       - libpulse0
       - ffmpegthumbnailer
       - libssl3t64
+      - libmagick++-6.q16hdri-9t64
+      - libmagickcore-6.q16hdri-7t64
+      - libmagickcore-6.q16hdri-7-extra
+      - libmagickwand-6.q16hdri-7t64
