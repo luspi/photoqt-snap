@@ -45,7 +45,7 @@ apps:
       - session-plug
       - ffmpeg-2404
     environment:
-      LD_LIBRARY_PATH: $SNAP/ffmpeg-platform/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$LD_LIBRARY_PATH
+      LD_LIBRARY_PATH: $SNAP/ffmpeg-platform/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$SNAP/usr/lib:$LD_LIBRARY_PATH
       PATH: $SNAP/ffmpeg-platform/usr/bin:$PATH
 
 compression: lzo
@@ -85,6 +85,9 @@ parts:
     source: https://photoqt.org/downloads/source/photoqt-5.4.tar.gz
     parse-info:
       - usr/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
+    override-build: |
+      cp /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libMagick++-6.Q16.so.9 /usr/lib
+      snapcraftctl build
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
