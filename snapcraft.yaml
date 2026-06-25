@@ -72,28 +72,13 @@ parts:
     source: https://photoqt.org/downloads/extensions/photoqt-extensions-5.4.tar.gz
     parse-info:
       - usr/share/metainfo/org.photoqt.Extensions.metainfo.xml
-    override-build: |
-      ln -sf /usr/include/GraphicsMagick/Magick++ /usr/include/Magick++
-      ln -sf /usr/include/GraphicsMagick/magick /usr/include/magick
-      snapcraftctl build
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_INSTALL_PREFIX=/usr/lib/PhotoQt/extensions
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DINSTALL_INTO_LIB_SUBDIR=ON
       - -DQT_QML_NO_CACHEGEN=ON
-      - -DWITH_IMAGEMAGICK=OFF
-      - -DWITH_GRAPHICSMAGICK=ON
     build-packages:
       - libexiv2-dev
-      - libexpat1-dev
-      - libheif-dev
-      - libjpeg-dev
-      - liblcms2-dev
-      - libpng-dev
-      - libtiff-dev
-      - libraw-dev
-      - libdevil-dev
-      - libgraphicsmagick++1-dev
-      - libgraphicsmagick1-dev
 
   photoqt:
     plugin: cmake
