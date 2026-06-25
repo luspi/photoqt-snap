@@ -171,4 +171,4 @@ parts:
       - graphicsmagick
       - libpulse0
       - ffmpegthumbnailer
-      - libssl
+      - libssl3t64
