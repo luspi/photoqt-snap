@@ -45,7 +45,7 @@ apps:
       - session-plug
       - ffmpeg-2404
     environment:
-      LD_LIBRARY_PATH: $SNAP/ffmpeg-platform/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$LD_LIBRARY_PATH
+      LD_LIBRARY_PATH: $SNAP/ffmpeg-platform/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$LD_LIBRARY_PATH
       PATH: $SNAP/ffmpeg-platform/usr/bin:$PATH
 
 compression: lzo
@@ -134,6 +134,7 @@ parts:
       - libproxy1v5
       - libffmpegthumbnailer-dev
       - libssl-dev
+      - libavfilter9
     stage-packages:
       - libheif1
       - libjpeg8
