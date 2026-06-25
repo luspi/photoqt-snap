@@ -85,9 +85,9 @@ parts:
     source: https://photoqt.org/downloads/source/photoqt-5.4.tar.gz
     parse-info:
       - usr/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
-    override-build: |
-      cp /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libMagick++-6.Q16.so.9 /usr/lib
-      snapcraftctl build
+    override-stage: |
+      snapcraftctl stage
+      cp $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libMagick++-6.Q16.so.9 $SNAP/usr/lib
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
@@ -131,9 +131,9 @@ parts:
       - libproxy1v5
       - libyaml-cpp-dev
       - qt6-declarative-dev
-      - libmagick++-6.q16hdri-dev
-      - libmagickcore-6.q16hdri-dev
-      - libmagickwand-6.q16hdri-dev
+      - libmagick++-6.q16-dev
+      - libmagickcore-6.q16-dev
+      - libmagickwand-6.q16-dev
       - libproxy1v5
       - libffmpegthumbnailer-dev
       - libssl-dev
@@ -156,8 +156,8 @@ parts:
       - libpulse0
       - ffmpegthumbnailer
       - libssl3t64
-      - libmagick++-6.q16hdri-9t64
-      - libmagickcore-6.q16hdri-7t64
-      - libmagickcore-6.q16hdri-7-extra
-      - libmagickwand-6.q16hdri-7t64
+      - libmagick++-6.q16-9t64
+      - libmagickcore-6.q16-7t64
+      - libmagickcore-6.q16-7-extra
+      - libmagickwand-6.q16-7t64
       - libavfilter9
