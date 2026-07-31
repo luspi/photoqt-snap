@@ -82,12 +82,9 @@ parts:
 
   photoqt:
     plugin: cmake
-    source: https://photoqt.org/downloads/source/photoqt-5.4.tar.gz
+    source: https://photoqt.org/downloads/source/photoqt-5.4.1.tar.gz
     parse-info:
       - usr/share/metainfo/org.photoqt.PhotoQt.metainfo.xml
-    override-stage: |
-      snapcraftctl stage
-      cp $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libMagick++-6.Q16.so.9 $SNAP/usr/lib
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
